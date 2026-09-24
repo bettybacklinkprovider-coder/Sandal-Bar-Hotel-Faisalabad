@@ -40,8 +40,8 @@ export const HomePage: React.FC<HomePageProps> = ({
         {/* Background Image with Dark Gradient Overlay */}
         <div className="absolute inset-0 z-0">
           <img
-            src="https://res.cloudinary.com/k7og2ybq/image/upload/v1790244121/unnamed.jpg"
-            alt="Sandal Bar Hotel Exterior Building"
+            src={HOTEL_INFO.heroImage}
+            alt="Sandal Bar Hotel Building Exterior - Saleemi Chowk Faisalabad"
             className="w-full h-full object-cover object-center scale-105 transform transition-transform duration-10000"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/75 to-slate-950/40" />
@@ -119,22 +119,29 @@ export const HomePage: React.FC<HomePageProps> = ({
             {/* Visual Column */}
             <div className="lg:col-span-6 relative space-y-4">
               
-              {/* Main Featured Photo */}
-              <div className="relative rounded-2xl overflow-hidden border border-amber-500/30 shadow-2xl group">
-                <img
-                  src="https://res.cloudinary.com/k7og2ybq/image/upload/v1790244121/unnamed.jpg"
-                  alt="Sandal Bar Hotel Exterior"
-                  className="w-full h-[360px] sm:h-[420px] object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent" />
-                <div className="absolute bottom-4 left-4 right-4 bg-slate-950/85 backdrop-blur-md p-4 rounded-xl border border-amber-500/20 flex items-center justify-between">
-                  <div>
-                    <p className="text-sm text-amber-400 font-bold font-cinzel">
-                      Sandal Bar Hotel
-                    </p>
-                    <p className="text-xs text-slate-200">
-                      Saleemi Chowk, Satiana Road, People's Colony No. 1, Faisalabad
-                    </p>
+              {/* Featured Photos Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div className="relative rounded-2xl overflow-hidden border border-amber-500/30 shadow-2xl group">
+                  <img
+                    src={HOTEL_INFO.heroImage}
+                    alt="Sandal Bar Hotel Main Building Front View"
+                    className="w-full h-56 sm:h-72 object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-80" />
+                  <div className="absolute bottom-3 left-3 right-3 bg-slate-950/80 backdrop-blur-md px-3 py-1.5 rounded-lg border border-amber-500/20 text-xs font-semibold text-amber-300">
+                    Main Entrance & Facade
+                  </div>
+                </div>
+
+                <div className="relative rounded-2xl overflow-hidden border border-amber-500/30 shadow-2xl group">
+                  <img
+                    src={HOTEL_INFO.secondaryImage}
+                    alt="Sandal Bar Hotel Exterior Architecture"
+                    className="w-full h-56 sm:h-72 object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-80" />
+                  <div className="absolute bottom-3 left-3 right-3 bg-slate-950/80 backdrop-blur-md px-3 py-1.5 rounded-lg border border-amber-500/20 text-xs font-semibold text-amber-300">
+                    Hotel Exterior & Front View
                   </div>
                 </div>
               </div>
@@ -398,6 +405,115 @@ export const HomePage: React.FC<HomePageProps> = ({
         </div>
       </section>
 
+      {/* =========================================================================
+          SECTION 5: HOTEL PHOTO GALLERY
+         ========================================================================= */}
+      <section className="py-20 px-4 sm:px-8 bg-slate-950 border-b border-slate-800">
+        <div className="max-w-7xl mx-auto space-y-12">
+          
+          <div className="text-center max-w-2xl mx-auto space-y-3">
+            <span className="text-xs font-bold uppercase tracking-widest text-amber-400 font-cinzel">
+              Visual Experience
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-bold font-serif-luxury text-white">
+              Sandal Bar Hotel Photo Gallery
+            </h2>
+            <p className="text-slate-400 text-sm">
+              Explore our building facade, luxurious suite interiors, dining spaces, and executive guest facilities at Saleemi Chowk, Faisalabad.
+            </p>
+          </div>
+
+          {/* Photo Gallery Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            
+            {/* Gallery Item 1 - New Main Exterior Photo */}
+            <div className="group relative rounded-2xl overflow-hidden border border-amber-500/30 bg-slate-900 shadow-xl h-72">
+              <img
+                src={HOTEL_INFO.heroImage}
+                alt="Sandal Bar Hotel Building Front Facade"
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity" />
+              <div className="absolute bottom-4 left-4 right-4 bg-slate-950/80 backdrop-blur-md p-3 rounded-xl border border-amber-500/20">
+                <p className="text-xs font-bold text-amber-400 uppercase font-cinzel">Hotel Exterior & Facade</p>
+                <p className="text-[11px] text-slate-200">Main Building View on Satiana Road</p>
+              </div>
+            </div>
+
+            {/* Gallery Item 2 - Secondary Exterior View */}
+            <div className="group relative rounded-2xl overflow-hidden border border-slate-800 hover:border-amber-500/30 bg-slate-900 shadow-xl h-72">
+              <img
+                src={HOTEL_INFO.secondaryImage}
+                alt="Sandal Bar Hotel Front View"
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity" />
+              <div className="absolute bottom-4 left-4 right-4 bg-slate-950/80 backdrop-blur-md p-3 rounded-xl border border-amber-500/20">
+                <p className="text-xs font-bold text-amber-400 uppercase font-cinzel">Hotel Entrance</p>
+                <p className="text-[11px] text-slate-200">Saleemi Chowk Entry Point</p>
+              </div>
+            </div>
+
+            {/* Gallery Item 3 - Executive Room */}
+            <div className="group relative rounded-2xl overflow-hidden border border-slate-800 hover:border-amber-500/30 bg-slate-900 shadow-xl h-72">
+              <img
+                src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&q=80&w=1200"
+                alt="Executive Deluxe Room Interior"
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity" />
+              <div className="absolute bottom-4 left-4 right-4 bg-slate-950/80 backdrop-blur-md p-3 rounded-xl border border-amber-500/20">
+                <p className="text-xs font-bold text-amber-400 uppercase font-cinzel">Executive Deluxe Room</p>
+                <p className="text-[11px] text-slate-200">Plush Comfort & Modern Lighting</p>
+              </div>
+            </div>
+
+            {/* Gallery Item 4 - Family Suite */}
+            <div className="group relative rounded-2xl overflow-hidden border border-slate-800 hover:border-amber-500/30 bg-slate-900 shadow-xl h-72">
+              <img
+                src="https://images.unsplash.com/photo-1591088398332-8a7791972843?auto=format&fit=crop&q=80&w=1200"
+                alt="Royal Family Suite Lounge"
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity" />
+              <div className="absolute bottom-4 left-4 right-4 bg-slate-950/80 backdrop-blur-md p-3 rounded-xl border border-amber-500/20">
+                <p className="text-xs font-bold text-amber-400 uppercase font-cinzel">Royal Family Suite</p>
+                <p className="text-[11px] text-slate-200">Spacious Family Seating Area</p>
+              </div>
+            </div>
+
+            {/* Gallery Item 5 - Restaurant */}
+            <div className="group relative rounded-2xl overflow-hidden border border-slate-800 hover:border-amber-500/30 bg-slate-900 shadow-xl h-72">
+              <img
+                src="https://i.pinimg.com/736x/10/51/b6/1051b6a145622940dd3a8847c9af66ca.jpg"
+                alt="In-House Dining Area"
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity" />
+              <div className="absolute bottom-4 left-4 right-4 bg-slate-950/80 backdrop-blur-md p-3 rounded-xl border border-amber-500/20">
+                <p className="text-xs font-bold text-amber-400 uppercase font-cinzel">In-House Dining</p>
+                <p className="text-[11px] text-slate-200">Fresh Pakistani Cuisine & Breakfast</p>
+              </div>
+            </div>
+
+            {/* Gallery Item 6 - Presidential Suite */}
+            <div className="group relative rounded-2xl overflow-hidden border border-slate-800 hover:border-amber-500/30 bg-slate-900 shadow-xl h-72">
+              <img
+                src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&q=80&w=1200"
+                alt="Presidential Suite Bedroom"
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity" />
+              <div className="absolute bottom-4 left-4 right-4 bg-slate-950/80 backdrop-blur-md p-3 rounded-xl border border-amber-500/20">
+                <p className="text-xs font-bold text-amber-400 uppercase font-cinzel">Presidential Suite</p>
+                <p className="text-[11px] text-slate-200">Luxury Interior & VIP Service</p>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
 
       {/* =========================================================================
           SECTION 6: CONTACT & LOCATION

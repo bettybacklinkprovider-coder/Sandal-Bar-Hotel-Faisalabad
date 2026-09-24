@@ -14,6 +14,8 @@ export const HOTEL_INFO = {
   checkInTime: '02:00 PM',
   checkOutTime: '12:00 PM',
   frontDesk: '24 Hours / 7 Days',
+  heroImage: 'https://res.cloudinary.com/k7og2ybq/image/upload/v1790244859/unnamed_1.jpg',
+  secondaryImage: 'https://res.cloudinary.com/k7og2ybq/image/upload/v1790244121/unnamed.jpg',
 };
 
 // High resolution hospitality photos
