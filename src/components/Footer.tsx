@@ -23,8 +23,12 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenBooking }) => 
           {/* Column 1: Brand & Info */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center text-slate-950 font-bold font-cinzel text-xl shadow-lg">
-                S
+              <div className="w-12 h-12 rounded-xl bg-slate-900 p-1 border border-amber-500/30 flex items-center justify-center shadow-lg overflow-hidden">
+                <img
+                  src={HOTEL_INFO.logoImage}
+                  alt="Sandal Bar Hotel Official Emblem"
+                  className="w-full h-full object-contain"
+                />
               </div>
               <div>
                 <div className="text-xl font-bold font-cinzel tracking-wider text-white">
@@ -72,6 +76,15 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenBooking }) => 
                 >
                   <ArrowRight className="w-3.5 h-3.5 text-amber-500 group-hover:translate-x-1 transition-transform" />
                   <span>Rooms & Accommodation</span>
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => { onNavigate('gallery'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                  className="hover:text-amber-400 transition-colors flex items-center gap-2 group"
+                >
+                  <ArrowRight className="w-3.5 h-3.5 text-amber-500 group-hover:translate-x-1 transition-transform" />
+                  <span>Photo Gallery</span>
                 </button>
               </li>
               <li>

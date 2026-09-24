@@ -26,7 +26,7 @@ export interface Facility {
 export interface GalleryItem {
   id: string;
   title: string;
-  category: 'exterior' | 'rooms' | 'lobby' | 'dining' | 'facilities';
+  category: 'exterior' | 'rooms' | 'bathrooms' | 'lobby' | 'dining' | 'facilities';
   imageUrl: string;
   caption: string;
 }
@@ -52,4 +52,4 @@ export interface Review {
   roomType: string;
 }
 
-export type PageRoute = 'home' | 'rooms' | 'contact';
+export type PageRoute = 'home' | 'rooms' | 'gallery' | 'contact';

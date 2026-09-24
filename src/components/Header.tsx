@@ -15,6 +15,7 @@ export const Header: React.FC<HeaderProps> = ({ activePage, onNavigate, onOpenBo
   const navItems: { id: PageRoute; label: string }[] = [
     { id: 'home', label: 'Home' },
     { id: 'rooms', label: 'Rooms & Accommodation' },
+    { id: 'gallery', label: 'Photo Gallery' },
     { id: 'contact', label: 'Contact Us' },
   ];
 
@@ -62,8 +63,12 @@ export const Header: React.FC<HeaderProps> = ({ activePage, onNavigate, onOpenBo
             onClick={() => handleNavClick('home')}
             className="flex items-center gap-3 text-left group focus:outline-none"
           >
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center text-slate-950 font-bold font-cinzel text-xl shadow-lg group-hover:scale-105 transition-transform">
-              S
+            <div className="w-11 h-11 rounded-xl bg-slate-950 p-1 border border-amber-500/30 flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform overflow-hidden">
+              <img
+                src={HOTEL_INFO.logoImage}
+                alt="Sandal Bar Hotel Logo"
+                className="w-full h-full object-contain"
+              />
             </div>
             <div>
               <div className="text-lg sm:text-xl font-bold font-cinzel tracking-wider text-slate-100 group-hover:text-amber-400 transition-colors">

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Phone,
   MapPin,
@@ -15,9 +15,14 @@ import {
   ArrowRight,
   ShieldCheck,
   CheckCircle,
+  Maximize2,
+  Image as ImageIcon
 } from 'lucide-react';
-import { HOTEL_INFO, ROOMS_DATA, FACILITIES_DATA } from '../data/hotelData';
+import { HOTEL_INFO, ROOMS_DATA, FACILITIES_DATA, GALLERY_ITEMS } from '../data/hotelData';
 import { PageRoute } from '../types/hotel';
+import { RoomCard } from '../components/RoomCard';
+import { OfficialBrandingCard } from '../components/OfficialBrandingCard';
+import { ImageLightboxModal } from '../components/ImageLightboxModal';
 
 interface HomePageProps {
   onNavigate: (page: PageRoute) => void;
@@ -28,6 +33,13 @@ export const HomePage: React.FC<HomePageProps> = ({
   onNavigate,
   onOpenBooking,
 }) => {
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [selectedPhotoIndex, setSelectedPhotoIndex] = useState(0);
+
+  const handleOpenPhoto = (index: number) => {
+    setSelectedPhotoIndex(index);
+    setLightboxOpen(true);
+  };
 
   return (
     <div className="min-h-screen text-slate-100 bg-slate-950">
@@ -52,8 +64,12 @@ export const HomePage: React.FC<HomePageProps> = ({
         <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-8 py-20 text-center space-y-8">
           
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900/80 border border-amber-500/30 text-amber-400 text-xs font-bold tracking-widest uppercase font-cinzel shadow-xl backdrop-blur-md">
-            <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+          <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-slate-900/90 border border-amber-500/40 text-amber-400 text-xs font-bold tracking-widest uppercase font-cinzel shadow-xl backdrop-blur-md">
+            <img
+              src={HOTEL_INFO.logoImage}
+              alt="Sandal Bar Hotel Symbol"
+              className="w-5 h-5 object-contain"
+            />
             <span>Executive Comfort in Faisalabad</span>
           </div>
 
@@ -268,68 +284,11 @@ export const HomePage: React.FC<HomePageProps> = ({
           {/* Cards Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {ROOMS_DATA.slice(0, 3).map((room) => (
-              <div
+              <RoomCard
                 key={room.id}
-                className="group bg-slate-900/80 border border-slate-800 hover:border-amber-500/40 rounded-2xl overflow-hidden shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col"
-              >
-                {/* Card Image */}
-                <div className="relative h-60 overflow-hidden">
-                  <img
-                    src={room.image}
-                    alt={room.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute top-3 left-3 bg-slate-950/80 backdrop-blur-md px-3 py-1 rounded-full text-xs font-semibold text-amber-400 border border-amber-500/20">
-                    {room.category}
-                  </div>
-                  <div className="absolute bottom-3 right-3 bg-slate-950/90 backdrop-blur-md px-3 py-1.5 rounded-xl border border-amber-500/30 text-right">
-                    <span className="text-xs text-slate-400 block">Per Night</span>
-                    <span className="text-sm font-bold text-amber-400 font-serif-luxury">PKR {room.pricePerNightPKR.toLocaleString()}</span>
-                  </div>
-                </div>
-
-                {/* Card Body */}
-                <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
-                  <div className="space-y-2">
-                    <h3 className="text-xl font-bold text-white font-serif-luxury group-hover:text-amber-400 transition-colors">
-                      {room.name}
-                    </h3>
-                    <p className="text-xs text-slate-400 line-clamp-2 leading-relaxed">
-                      {room.description}
-                    </p>
-                  </div>
-
-                  {/* Room specs */}
-                  <div className="grid grid-cols-2 gap-2 text-xs text-slate-300 pt-2 border-t border-slate-800/80">
-                    <div className="flex items-center gap-1.5">
-                      <BedDouble className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-                      <span className="truncate">{room.bedType}</span>
-                    </div>
-                    <div className="flex items-center gap-1.5">
-                      <UserCheck className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-                      <span>Up to {room.maxGuests} Guests</span>
-                    </div>
-                  </div>
-
-                  {/* Card Actions */}
-                  <div className="pt-2 flex items-center gap-2">
-                    <button
-                      onClick={() => onOpenBooking(room.id)}
-                      className="flex-1 py-3 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-bold text-xs uppercase tracking-wider rounded-xl shadow-md transition-all text-center flex items-center justify-center gap-1.5"
-                    >
-                      <Calendar className="w-3.5 h-3.5" /> Book Now
-                    </button>
-                    <a
-                      href={`tel:${HOTEL_INFO.phone}`}
-                      className="p-3 bg-slate-800 hover:bg-slate-700 text-amber-400 rounded-xl transition-colors shrink-0"
-                      title="Call Hotel to Book"
-                    >
-                      <Phone className="w-4 h-4" />
-                    </a>
-                  </div>
-                </div>
-
-              </div>
+                room={room}
+                onOpenBooking={onOpenBooking}
+              />
             ))}
           </div>
 
@@ -423,123 +382,90 @@ export const HomePage: React.FC<HomePageProps> = ({
       <section className="py-20 px-4 sm:px-8 bg-slate-950 border-b border-slate-800">
         <div className="max-w-7xl mx-auto space-y-12">
           
-          <div className="text-center max-w-2xl mx-auto space-y-3">
-            <span className="text-xs font-bold uppercase tracking-widest text-amber-400 font-cinzel">
-              Visual Experience
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-bold font-serif-luxury text-white">
-              Sandal Bar Hotel Photo Gallery
-            </h2>
-            <p className="text-slate-400 text-sm">
-              Explore our building facade, luxurious suite interiors, dining spaces, and executive guest facilities at Saleemi Chowk, Faisalabad.
-            </p>
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <div className="space-y-2">
+              <span className="text-xs font-bold uppercase tracking-widest text-amber-400 font-cinzel">
+                Visual Experience
+              </span>
+              <h2 className="text-3xl sm:text-4xl font-bold font-serif-luxury text-white">
+                Sandal Bar Hotel Photo Gallery
+              </h2>
+              <p className="text-slate-400 text-sm max-w-xl">
+                Explore building exterior views, executive suite interiors, marble bathrooms, dining spaces, and 24/7 guest facilities at Saleemi Chowk.
+              </p>
+            </div>
+
+            <button
+              onClick={() => onNavigate('gallery')}
+              className="px-6 py-3.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs uppercase tracking-wider rounded-xl shadow-lg transition-all self-start md:self-auto flex items-center gap-2"
+            >
+              <ImageIcon className="w-4 h-4" />
+              <span>View Full Photo Gallery ({GALLERY_ITEMS.length} Photos)</span>
+            </button>
           </div>
 
           {/* Photo Gallery Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            
-            {/* Gallery Item 1 - Main Exterior Photo */}
-            <div className="group relative rounded-2xl overflow-hidden border border-amber-500/30 bg-slate-900 shadow-xl h-72">
-              <img
-                src={HOTEL_INFO.heroImage}
-                alt="Sandal Bar Hotel Building Front Facade"
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity" />
-              <div className="absolute bottom-4 left-4 right-4 bg-slate-950/80 backdrop-blur-md p-3 rounded-xl border border-amber-500/20">
-                <p className="text-xs font-bold text-amber-400 uppercase font-cinzel">Hotel Exterior & Facade</p>
-                <p className="text-[11px] text-slate-200">Main Building View on Satiana Road</p>
-              </div>
-            </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {GALLERY_ITEMS.slice(0, 7).map((item, idx) => (
+              <div
+                key={item.id}
+                onClick={() => handleOpenPhoto(idx)}
+                className="group relative rounded-2xl overflow-hidden border border-slate-800 hover:border-amber-500/40 bg-slate-900 shadow-xl h-72 cursor-pointer transition-all duration-300 hover:-translate-y-1 flex flex-col justify-end"
+              >
+                <img
+                  src={item.imageUrl}
+                  alt={item.title}
+                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
+                
+                {/* Category Tag */}
+                <div className="absolute top-3 left-3 z-10">
+                  <span className="bg-slate-950/80 backdrop-blur-md px-2.5 py-0.5 rounded-full text-[10px] font-bold text-amber-400 border border-amber-500/30 uppercase tracking-wider font-cinzel">
+                    {item.category}
+                  </span>
+                </div>
 
-            {/* Gallery Item 2 - Tertiary Building View */}
-            <div className="group relative rounded-2xl overflow-hidden border border-amber-500/30 bg-slate-900 shadow-xl h-72">
-              <img
-                src={HOTEL_INFO.tertiaryImage}
-                alt="Sandal Bar Hotel Building Front View"
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity" />
-              <div className="absolute bottom-4 left-4 right-4 bg-slate-950/80 backdrop-blur-md p-3 rounded-xl border border-amber-500/20">
-                <p className="text-xs font-bold text-amber-400 uppercase font-cinzel">Executive Frontage</p>
-                <p className="text-[11px] text-slate-200">Saleemi Chowk Front Elevation</p>
-              </div>
-            </div>
+                {/* Zoom Badge */}
+                <div className="absolute inset-0 z-10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="w-10 h-10 rounded-full bg-amber-500 text-slate-950 flex items-center justify-center shadow-xl">
+                    <Maximize2 className="w-5 h-5" />
+                  </div>
+                </div>
 
-            {/* Gallery Item 3 - Secondary Exterior View */}
-            <div className="group relative rounded-2xl overflow-hidden border border-slate-800 hover:border-amber-500/30 bg-slate-900 shadow-xl h-72">
-              <img
-                src={HOTEL_INFO.secondaryImage}
-                alt="Sandal Bar Hotel Front View"
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity" />
-              <div className="absolute bottom-4 left-4 right-4 bg-slate-950/80 backdrop-blur-md p-3 rounded-xl border border-amber-500/20">
-                <p className="text-xs font-bold text-amber-400 uppercase font-cinzel">Hotel Entrance & Street View</p>
-                <p className="text-[11px] text-slate-200">People's Colony No. 1 View</p>
+                {/* Bottom Card Caption */}
+                <div className="relative z-10 m-3 p-3 bg-slate-950/90 backdrop-blur-md rounded-xl border border-amber-500/20">
+                  <p className="text-xs font-bold text-amber-400 uppercase font-cinzel truncate">{item.title}</p>
+                  <p className="text-[11px] text-slate-200 truncate">{item.caption}</p>
+                </div>
               </div>
-            </div>
+            ))}
 
-            {/* Gallery Item 3 - Executive Room */}
-            <div className="group relative rounded-2xl overflow-hidden border border-slate-800 hover:border-amber-500/30 bg-slate-900 shadow-xl h-72">
-              <img
-                src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&q=80&w=1200"
-                alt="Executive Deluxe Room Interior"
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity" />
-              <div className="absolute bottom-4 left-4 right-4 bg-slate-950/80 backdrop-blur-md p-3 rounded-xl border border-amber-500/20">
-                <p className="text-xs font-bold text-amber-400 uppercase font-cinzel">Executive Deluxe Room</p>
-                <p className="text-[11px] text-slate-200">Plush Comfort & Modern Lighting</p>
-              </div>
-            </div>
+            {/* Official Branding Card */}
+            <OfficialBrandingCard className="sm:col-span-1 lg:col-span-1 h-72 p-6" />
+          </div>
 
-            {/* Gallery Item 4 - Family Suite */}
-            <div className="group relative rounded-2xl overflow-hidden border border-slate-800 hover:border-amber-500/30 bg-slate-900 shadow-xl h-72">
-              <img
-                src="https://images.unsplash.com/photo-1591088398332-8a7791972843?auto=format&fit=crop&q=80&w=1200"
-                alt="Royal Family Suite Lounge"
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity" />
-              <div className="absolute bottom-4 left-4 right-4 bg-slate-950/80 backdrop-blur-md p-3 rounded-xl border border-amber-500/20">
-                <p className="text-xs font-bold text-amber-400 uppercase font-cinzel">Royal Family Suite</p>
-                <p className="text-[11px] text-slate-200">Spacious Family Seating Area</p>
-              </div>
-            </div>
-
-            {/* Gallery Item 5 - Restaurant */}
-            <div className="group relative rounded-2xl overflow-hidden border border-slate-800 hover:border-amber-500/30 bg-slate-900 shadow-xl h-72">
-              <img
-                src="https://i.pinimg.com/736x/10/51/b6/1051b6a145622940dd3a8847c9af66ca.jpg"
-                alt="In-House Dining Area"
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity" />
-              <div className="absolute bottom-4 left-4 right-4 bg-slate-950/80 backdrop-blur-md p-3 rounded-xl border border-amber-500/20">
-                <p className="text-xs font-bold text-amber-400 uppercase font-cinzel">In-House Dining</p>
-                <p className="text-[11px] text-slate-200">Fresh Pakistani Cuisine & Breakfast</p>
-              </div>
-            </div>
-
-            {/* Gallery Item 6 - Presidential Suite */}
-            <div className="group relative rounded-2xl overflow-hidden border border-slate-800 hover:border-amber-500/30 bg-slate-900 shadow-xl h-72">
-              <img
-                src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&q=80&w=1200"
-                alt="Presidential Suite Bedroom"
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity" />
-              <div className="absolute bottom-4 left-4 right-4 bg-slate-950/80 backdrop-blur-md p-3 rounded-xl border border-amber-500/20">
-                <p className="text-xs font-bold text-amber-400 uppercase font-cinzel">Presidential Suite</p>
-                <p className="text-[11px] text-slate-200">Luxury Interior & VIP Service</p>
-              </div>
-            </div>
-
+          <div className="text-center pt-4">
+            <button
+              onClick={() => onNavigate('gallery')}
+              className="inline-flex items-center gap-2 text-amber-400 hover:text-amber-300 font-bold text-xs uppercase tracking-widest font-cinzel group"
+            >
+              <span>Explore All {GALLERY_ITEMS.length} Photos in High-Res Lightbox</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </button>
           </div>
 
         </div>
       </section>
+
+      {/* Lightbox Modal for Homepage Photos */}
+      <ImageLightboxModal
+        isOpen={lightboxOpen}
+        onClose={() => setLightboxOpen(false)}
+        images={GALLERY_ITEMS}
+        initialIndex={selectedPhotoIndex}
+        onOpenBooking={onOpenBooking}
+      />
 
       {/* =========================================================================
           SECTION 6: CONTACT & LOCATION

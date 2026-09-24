@@ -5,13 +5,14 @@ import { BookingModal } from './components/BookingModal';
 import { FloatingContactBar } from './components/FloatingContactBar';
 import { HomePage } from './pages/HomePage';
 import { RoomsPage } from './pages/RoomsPage';
+import { GalleryPage } from './pages/GalleryPage';
 import { ContactPage } from './pages/ContactPage';
 import { PageRoute } from './types/hotel';
 
 export default function App() {
   const [activePage, setActivePage] = useState<PageRoute>(() => {
     const hash = window.location.hash.replace('#/', '').replace('#', '');
-    if (['home', 'rooms', 'contact'].includes(hash)) {
+    if (['home', 'rooms', 'gallery', 'contact'].includes(hash)) {
       return hash as PageRoute;
     }
     return 'home';
@@ -23,7 +24,7 @@ export default function App() {
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash.replace('#/', '').replace('#', '');
-      if (['home', 'rooms', 'contact'].includes(hash)) {
+      if (['home', 'rooms', 'gallery', 'contact'].includes(hash)) {
         setActivePage(hash as PageRoute);
       } else if (!hash) {
         setActivePage('home');
@@ -67,6 +68,12 @@ export default function App() {
         {activePage === 'rooms' && (
           <RoomsPage
             onOpenBooking={handleOpenBooking}
+          />
+        )}
+
+        {activePage === 'gallery' && (
+          <GalleryPage
+            onOpenBooking={() => handleOpenBooking()}
           />
         )}
 
