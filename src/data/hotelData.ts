@@ -16,6 +16,12 @@ export const HOTEL_INFO = {
   frontDesk: '24 Hours / 7 Days',
   heroImage: 'https://res.cloudinary.com/k7og2ybq/image/upload/v1790244859/unnamed_1.jpg',
   secondaryImage: 'https://res.cloudinary.com/k7og2ybq/image/upload/v1790244121/unnamed.jpg',
+  tertiaryImage: 'https://res.cloudinary.com/k7og2ybq/image/upload/v1790245444/unnamed_2.jpg',
+  gallery: [
+    'https://res.cloudinary.com/k7og2ybq/image/upload/v1790244859/unnamed_1.jpg',
+    'https://res.cloudinary.com/k7og2ybq/image/upload/v1790245444/unnamed_2.jpg',
+    'https://res.cloudinary.com/k7og2ybq/image/upload/v1790244121/unnamed.jpg',
+  ]
 };
 
 // High resolution hospitality photos

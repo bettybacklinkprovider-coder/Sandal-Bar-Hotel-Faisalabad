@@ -119,29 +119,41 @@ export const HomePage: React.FC<HomePageProps> = ({
             {/* Visual Column */}
             <div className="lg:col-span-6 relative space-y-4">
               
-              {/* Featured Photos Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {/* Featured Photos Grid - 3 Official Photos */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <div className="relative rounded-2xl overflow-hidden border border-amber-500/30 shadow-2xl group">
                   <img
                     src={HOTEL_INFO.heroImage}
                     alt="Sandal Bar Hotel Main Building Front View"
-                    className="w-full h-56 sm:h-72 object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-48 sm:h-56 object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-80" />
-                  <div className="absolute bottom-3 left-3 right-3 bg-slate-950/80 backdrop-blur-md px-3 py-1.5 rounded-lg border border-amber-500/20 text-xs font-semibold text-amber-300">
-                    Main Entrance & Facade
+                  <div className="absolute bottom-2 left-2 right-2 bg-slate-950/80 backdrop-blur-md px-2.5 py-1 rounded-lg border border-amber-500/20 text-[11px] font-semibold text-amber-300 truncate">
+                    Main Entrance
+                  </div>
+                </div>
+
+                <div className="relative rounded-2xl overflow-hidden border border-amber-500/30 shadow-2xl group">
+                  <img
+                    src={HOTEL_INFO.tertiaryImage}
+                    alt="Sandal Bar Hotel Exterior Architecture"
+                    className="w-full h-48 sm:h-56 object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-80" />
+                  <div className="absolute bottom-2 left-2 right-2 bg-slate-950/80 backdrop-blur-md px-2.5 py-1 rounded-lg border border-amber-500/20 text-[11px] font-semibold text-amber-300 truncate">
+                    Executive Front View
                   </div>
                 </div>
 
                 <div className="relative rounded-2xl overflow-hidden border border-amber-500/30 shadow-2xl group">
                   <img
                     src={HOTEL_INFO.secondaryImage}
-                    alt="Sandal Bar Hotel Exterior Architecture"
-                    className="w-full h-56 sm:h-72 object-cover group-hover:scale-105 transition-transform duration-500"
+                    alt="Sandal Bar Hotel Frontage"
+                    className="w-full h-48 sm:h-56 object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-80" />
-                  <div className="absolute bottom-3 left-3 right-3 bg-slate-950/80 backdrop-blur-md px-3 py-1.5 rounded-lg border border-amber-500/20 text-xs font-semibold text-amber-300">
-                    Hotel Exterior & Front View
+                  <div className="absolute bottom-2 left-2 right-2 bg-slate-950/80 backdrop-blur-md px-2.5 py-1 rounded-lg border border-amber-500/20 text-[11px] font-semibold text-amber-300 truncate">
+                    Satiana Road View
                   </div>
                 </div>
               </div>
@@ -426,7 +438,7 @@ export const HomePage: React.FC<HomePageProps> = ({
           {/* Photo Gallery Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             
-            {/* Gallery Item 1 - New Main Exterior Photo */}
+            {/* Gallery Item 1 - Main Exterior Photo */}
             <div className="group relative rounded-2xl overflow-hidden border border-amber-500/30 bg-slate-900 shadow-xl h-72">
               <img
                 src={HOTEL_INFO.heroImage}
@@ -440,7 +452,21 @@ export const HomePage: React.FC<HomePageProps> = ({
               </div>
             </div>
 
-            {/* Gallery Item 2 - Secondary Exterior View */}
+            {/* Gallery Item 2 - Tertiary Building View */}
+            <div className="group relative rounded-2xl overflow-hidden border border-amber-500/30 bg-slate-900 shadow-xl h-72">
+              <img
+                src={HOTEL_INFO.tertiaryImage}
+                alt="Sandal Bar Hotel Building Front View"
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity" />
+              <div className="absolute bottom-4 left-4 right-4 bg-slate-950/80 backdrop-blur-md p-3 rounded-xl border border-amber-500/20">
+                <p className="text-xs font-bold text-amber-400 uppercase font-cinzel">Executive Frontage</p>
+                <p className="text-[11px] text-slate-200">Saleemi Chowk Front Elevation</p>
+              </div>
+            </div>
+
+            {/* Gallery Item 3 - Secondary Exterior View */}
             <div className="group relative rounded-2xl overflow-hidden border border-slate-800 hover:border-amber-500/30 bg-slate-900 shadow-xl h-72">
               <img
                 src={HOTEL_INFO.secondaryImage}
@@ -449,8 +475,8 @@ export const HomePage: React.FC<HomePageProps> = ({
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity" />
               <div className="absolute bottom-4 left-4 right-4 bg-slate-950/80 backdrop-blur-md p-3 rounded-xl border border-amber-500/20">
-                <p className="text-xs font-bold text-amber-400 uppercase font-cinzel">Hotel Entrance</p>
-                <p className="text-[11px] text-slate-200">Saleemi Chowk Entry Point</p>
+                <p className="text-xs font-bold text-amber-400 uppercase font-cinzel">Hotel Entrance & Street View</p>
+                <p className="text-[11px] text-slate-200">People's Colony No. 1 View</p>
               </div>
             </div>
 
