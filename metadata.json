@@ -1,0 +1,6 @@
+{
+  "name": "Sandal Bar Hotel Faisalabad",
+  "description": "Official website for Sandal Bar Hotel in Faisalabad, Pakistan. Book premium comfortable rooms, enjoy luxury amenities, fine dining, and top hospitality at Satiana Road, People's Colony.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
