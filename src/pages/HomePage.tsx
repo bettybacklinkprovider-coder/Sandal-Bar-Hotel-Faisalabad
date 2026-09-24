@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Phone,
   MapPin,
@@ -11,35 +11,23 @@ import {
   Clock,
   UserCheck,
   Zap,
-  Star,
   Navigation,
   ArrowRight,
   ShieldCheck,
   CheckCircle,
-  Eye
 } from 'lucide-react';
-import { HOTEL_INFO, ROOMS_DATA, FACILITIES_DATA, GALLERY_DATA, TESTIMONIALS_DATA } from '../data/hotelData';
-import { PageRoute, GalleryItem } from '../types/hotel';
+import { HOTEL_INFO, ROOMS_DATA, FACILITIES_DATA } from '../data/hotelData';
+import { PageRoute } from '../types/hotel';
 
 interface HomePageProps {
   onNavigate: (page: PageRoute) => void;
   onOpenBooking: (roomId?: string) => void;
-  onOpenGalleryLightbox: (items: GalleryItem[], index: number) => void;
 }
 
 export const HomePage: React.FC<HomePageProps> = ({
   onNavigate,
   onOpenBooking,
-  onOpenGalleryLightbox,
 }) => {
-  const [galleryTab, setGalleryTab] = useState<string>('all');
-  const [activeExteriorIndex, setActiveExteriorIndex] = useState<number>(0);
-
-  const exteriorPhotos = GALLERY_DATA.filter((g) => g.category === 'exterior');
-
-  const filteredGallery = galleryTab === 'all'
-    ? GALLERY_DATA
-    : GALLERY_DATA.filter((g) => g.category === galleryTab);
 
   return (
     <div className="min-h-screen text-slate-100 bg-slate-950">
@@ -52,7 +40,7 @@ export const HomePage: React.FC<HomePageProps> = ({
         {/* Background Image with Dark Gradient Overlay */}
         <div className="absolute inset-0 z-0">
           <img
-            src="https://res.cloudinary.com/k7og2ybq/image/upload/v1790238996/unnamed.jpg"
+            src="https://res.cloudinary.com/k7og2ybq/image/upload/v1790244121/unnamed.jpg"
             alt="Sandal Bar Hotel Exterior Building"
             className="w-full h-full object-cover object-center scale-105 transform transition-transform duration-10000"
           />
@@ -129,61 +117,30 @@ export const HomePage: React.FC<HomePageProps> = ({
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
             {/* Visual Column */}
-            {/* Visual Column */}
-            <div className="lg:col-span-6 relative space-y-3">
+            <div className="lg:col-span-6 relative space-y-4">
               
               {/* Main Featured Photo */}
-              <div
-                onClick={() => onOpenGalleryLightbox(GALLERY_DATA, activeExteriorIndex)}
-                className="relative rounded-2xl overflow-hidden border border-amber-500/30 shadow-2xl group cursor-pointer"
-              >
+              <div className="relative rounded-2xl overflow-hidden border border-amber-500/30 shadow-2xl group">
                 <img
-                  src={exteriorPhotos[activeExteriorIndex]?.imageUrl || GALLERY_DATA[0].imageUrl}
-                  alt={exteriorPhotos[activeExteriorIndex]?.title || 'Sandal Bar Hotel Exterior'}
-                  className="w-full h-[320px] sm:h-[380px] object-cover group-hover:scale-105 transition-transform duration-500"
+                  src="https://res.cloudinary.com/k7og2ybq/image/upload/v1790244121/unnamed.jpg"
+                  alt="Sandal Bar Hotel Exterior"
+                  className="w-full h-[360px] sm:h-[420px] object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent" />
-                <div className="absolute bottom-3 left-3 right-3 bg-slate-950/85 backdrop-blur-md p-3 rounded-xl border border-amber-500/20 flex items-center justify-between">
+                <div className="absolute bottom-4 left-4 right-4 bg-slate-950/85 backdrop-blur-md p-4 rounded-xl border border-amber-500/20 flex items-center justify-between">
                   <div>
-                    <p className="text-xs text-amber-400 font-bold font-cinzel">
-                      {exteriorPhotos[activeExteriorIndex]?.title || 'Sandal Bar Hotel Exterior'}
+                    <p className="text-sm text-amber-400 font-bold font-cinzel">
+                      Sandal Bar Hotel
                     </p>
-                    <p className="text-[11px] text-slate-200">
-                      {exteriorPhotos[activeExteriorIndex]?.caption || "Saleemi Chowk, Satiana Road, People's Colony No. 1, Faisalabad"}
+                    <p className="text-xs text-slate-200">
+                      Saleemi Chowk, Satiana Road, People's Colony No. 1, Faisalabad
                     </p>
-                  </div>
-                  <div className="p-2 bg-amber-500/20 text-amber-400 rounded-lg group-hover:bg-amber-500 group-hover:text-slate-950 transition-colors shrink-0">
-                    <Eye className="w-4 h-4" />
                   </div>
                 </div>
               </div>
 
-              {/* Exterior Photos Thumbnails Grid */}
-              <div className="grid grid-cols-4 sm:grid-cols-7 gap-2">
-                {exteriorPhotos.map((photo, idx) => (
-                  <button
-                    key={photo.id}
-                    onClick={() => setActiveExteriorIndex(idx)}
-                    className={`relative h-16 sm:h-20 rounded-xl overflow-hidden border transition-all ${
-                      activeExteriorIndex === idx
-                        ? 'border-amber-400 ring-2 ring-amber-500/40 scale-105 z-10 shadow-lg'
-                        : 'border-slate-800 opacity-60 hover:opacity-100 hover:border-amber-500/40'
-                    }`}
-                  >
-                    <img
-                      src={photo.imageUrl}
-                      alt={photo.title}
-                      className="w-full h-full object-cover"
-                    />
-                    {activeExteriorIndex === idx && (
-                      <div className="absolute inset-0 border-2 border-amber-400 rounded-xl pointer-events-none" />
-                    )}
-                  </button>
-                ))}
-              </div>
-
               {/* Decorative Accent Card */}
-              <div className="hidden lg:flex z-20 bg-slate-950/90 backdrop-blur-md border border-amber-500/30 p-4 rounded-2xl shadow-2xl items-center gap-4 mt-4">
+              <div className="flex bg-slate-950/90 backdrop-blur-md border border-amber-500/30 p-4 rounded-2xl shadow-2xl items-center gap-4">
                 <div className="w-10 h-10 bg-amber-500/20 rounded-xl flex items-center justify-center text-amber-400 shrink-0">
                   <ShieldCheck className="w-5 h-5" />
                 </div>
@@ -441,88 +398,6 @@ export const HomePage: React.FC<HomePageProps> = ({
         </div>
       </section>
 
-      {/* =========================================================================
-          SECTION 5: GALLERY
-         ========================================================================= */}
-      <section className="py-20 px-4 sm:px-8 bg-slate-950 border-b border-slate-800">
-        <div className="max-w-7xl mx-auto space-y-10">
-          
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6">
-            <div className="space-y-2">
-              <span className="text-xs font-bold uppercase tracking-widest text-amber-400 font-cinzel">
-                Visual Tour
-              </span>
-              <h2 className="text-3xl sm:text-4xl font-bold font-serif-luxury text-white">
-                Hotel Photo Gallery
-              </h2>
-              <p className="text-slate-400 text-sm">
-                Explore real photography of our guest rooms, exterior facade, dining area, and lobby.
-              </p>
-            </div>
-
-            <button
-              onClick={() => onNavigate('gallery')}
-              className="px-5 py-2.5 bg-slate-900 border border-amber-500/30 text-amber-400 font-bold text-xs uppercase tracking-wider rounded-xl hover:bg-slate-800 transition-colors flex items-center gap-2 self-start sm:self-auto"
-            >
-              <span>Full Gallery Page</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
-          </div>
-
-          {/* Filter Pills */}
-          <div className="flex flex-wrap gap-2">
-            {[
-              { id: 'all', label: 'All Photos' },
-              { id: 'exterior', label: 'Exterior' },
-              { id: 'rooms', label: 'Rooms' },
-              { id: 'dining', label: 'Dining' },
-              { id: 'lobby', label: 'Lobby' },
-            ].map((tab) => (
-              <button
-                key={tab.id}
-                onClick={() => setGalleryTab(tab.id)}
-                className={`px-4 py-2 rounded-xl text-xs font-semibold tracking-wider transition-colors ${
-                  galleryTab === tab.id
-                    ? 'bg-amber-500 text-slate-950 font-bold'
-                    : 'bg-slate-900 text-slate-300 hover:bg-slate-800'
-                }`}
-              >
-                {tab.label}
-              </button>
-            ))}
-          </div>
-
-          {/* Gallery Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            {filteredGallery.slice(0, 12).map((item, idx) => (
-              <div
-                key={item.id}
-                onClick={() => onOpenGalleryLightbox(filteredGallery, idx)}
-                className="group relative h-64 rounded-2xl overflow-hidden border border-slate-800 cursor-pointer shadow-lg"
-              >
-                <img
-                  src={item.imageUrl}
-                  alt={item.title}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-60 group-hover:opacity-85 transition-opacity" />
-
-                <div className="absolute inset-0 p-5 flex flex-col justify-end text-white">
-                  <span className="text-[10px] uppercase font-bold tracking-widest text-amber-400 font-cinzel">
-                    {item.category}
-                  </span>
-                  <h4 className="text-base font-bold font-serif-luxury">{item.title}</h4>
-                  <div className="pt-2 flex items-center gap-1.5 text-xs text-amber-300 font-medium opacity-0 group-hover:opacity-100 transition-opacity">
-                    <Eye className="w-3.5 h-3.5" />
-                    <span>Click to view lightbox</span>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-        </div>
-      </section>
 
       {/* =========================================================================
           SECTION 6: CONTACT & LOCATION

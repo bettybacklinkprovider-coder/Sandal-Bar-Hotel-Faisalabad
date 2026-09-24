@@ -76,15 +76,6 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenBooking }) => 
               </li>
               <li>
                 <button
-                  onClick={() => { onNavigate('gallery'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-                  className="hover:text-amber-400 transition-colors flex items-center gap-2 group"
-                >
-                  <ArrowRight className="w-3.5 h-3.5 text-amber-500 group-hover:translate-x-1 transition-transform" />
-                  <span>Photo Gallery</span>
-                </button>
-              </li>
-              <li>
-                <button
                   onClick={() => { onNavigate('contact'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
                   className="hover:text-amber-400 transition-colors flex items-center gap-2 group"
                 >

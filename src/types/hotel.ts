@@ -52,4 +52,4 @@ export interface Review {
   roomType: string;
 }
 
-export type PageRoute = 'home' | 'rooms' | 'gallery' | 'contact';
+export type PageRoute = 'home' | 'rooms' | 'contact';

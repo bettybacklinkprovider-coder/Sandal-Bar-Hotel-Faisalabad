@@ -15,7 +15,6 @@ export const Header: React.FC<HeaderProps> = ({ activePage, onNavigate, onOpenBo
   const navItems: { id: PageRoute; label: string }[] = [
     { id: 'home', label: 'Home' },
     { id: 'rooms', label: 'Rooms & Accommodation' },
-    { id: 'gallery', label: 'Gallery' },
     { id: 'contact', label: 'Contact Us' },
   ];
 

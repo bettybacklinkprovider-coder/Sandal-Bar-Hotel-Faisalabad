@@ -2,18 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { BookingModal } from './components/BookingModal';
-import { LightboxModal } from './components/LightboxModal';
 import { FloatingContactBar } from './components/FloatingContactBar';
 import { HomePage } from './pages/HomePage';
 import { RoomsPage } from './pages/RoomsPage';
-import { GalleryPage } from './pages/GalleryPage';
 import { ContactPage } from './pages/ContactPage';
-import { PageRoute, GalleryItem } from './types/hotel';
+import { PageRoute } from './types/hotel';
 
 export default function App() {
   const [activePage, setActivePage] = useState<PageRoute>(() => {
     const hash = window.location.hash.replace('#/', '').replace('#', '');
-    if (['home', 'rooms', 'gallery', 'contact'].includes(hash)) {
+    if (['home', 'rooms', 'contact'].includes(hash)) {
       return hash as PageRoute;
     }
     return 'home';
@@ -22,14 +20,10 @@ export default function App() {
   const [bookingModalOpen, setBookingModalOpen] = useState(false);
   const [selectedRoomId, setSelectedRoomId] = useState<string | undefined>();
 
-  const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [lightboxItems, setLightboxItems] = useState<GalleryItem[]>([]);
-  const [lightboxIndex, setLightboxIndex] = useState(0);
-
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash.replace('#/', '').replace('#', '');
-      if (['home', 'rooms', 'gallery', 'contact'].includes(hash)) {
+      if (['home', 'rooms', 'contact'].includes(hash)) {
         setActivePage(hash as PageRoute);
       } else if (!hash) {
         setActivePage('home');
@@ -51,12 +45,6 @@ export default function App() {
     setBookingModalOpen(true);
   };
 
-  const handleOpenLightbox = (items: GalleryItem[], index: number) => {
-    setLightboxItems(items);
-    setLightboxIndex(index);
-    setLightboxOpen(true);
-  };
-
   return (
     <div className="min-h-screen flex flex-col bg-slate-950 font-sans text-slate-100 antialiased selection:bg-amber-500 selection:text-slate-950">
       
@@ -73,19 +61,12 @@ export default function App() {
           <HomePage
             onNavigate={handleNavigate}
             onOpenBooking={handleOpenBooking}
-            onOpenGalleryLightbox={handleOpenLightbox}
           />
         )}
 
         {activePage === 'rooms' && (
           <RoomsPage
             onOpenBooking={handleOpenBooking}
-          />
-        )}
-
-        {activePage === 'gallery' && (
-          <GalleryPage
-            onOpenLightbox={handleOpenLightbox}
           />
         )}
 
@@ -110,15 +91,6 @@ export default function App() {
         isOpen={bookingModalOpen}
         onClose={() => setBookingModalOpen(false)}
         selectedRoomId={selectedRoomId}
-      />
-
-      {/* Fullscreen Lightbox Modal */}
-      <LightboxModal
-        isOpen={lightboxOpen}
-        onClose={() => setLightboxOpen(false)}
-        items={lightboxItems}
-        currentIndex={lightboxIndex}
-        onSelectIndex={(idx) => setLightboxIndex(idx)}
       />
 
     </div>
